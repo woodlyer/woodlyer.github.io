@@ -47,6 +47,15 @@ https://www.racknerd.com/NewYear/  这样的页面购买才划算。这个页面
 
 
 3.申请域名和证书
+这里只讲免费的证书申请网站，
+freenom.com 可以申请.tk  .cf ，申请方法参考这个链接 ： https://zhujitips.com/328
+免费的域名解析网站， 1.2.3.4.sslip.io  将自动解析到1.2.3.4这个IP地址，非常好用。https://sslip.io/   https://nip.io/
+收费的就不用说了。
+
+域名申请脚本：
+
+
+
 
 
 4.部署服务 
@@ -104,4 +113,5 @@ tlanyan 有一些部署方法介绍 https://itlanyan.com/
 https://xtls.github.io/
 
 https://www.v2fly.org/ v2fly官方网站
+
 
