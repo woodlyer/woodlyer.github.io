@@ -95,6 +95,7 @@ RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选�
 前两年因为有传言说老板是跑路四大金刚，RackNerd是灵车，和RackNerd迅速蹿升的知名度伴随着的还有巨大的争议。不过由于这几年RackNerd持续稳定的服务，这类传言也逐渐销声匿迹。
 点击[黑色星期五优惠](https://www.racknerd.com/BlackFriday/ )这个页面购买优惠的VPS。 首页上最上面可能也会不定期展示优惠链接， 点击这样的优惠链接购买才划算。这个页面可能会随着时间变化，大家可以在网上搜索一下，用这样的优惠链接打开进行购买。
 [![优惠页面](./img/rack-discount.png)](https://www.racknerd.com/NewYear/)
+<<<<<<< HEAD
 
 
 ## 3.申请域名和证书
@@ -290,11 +291,223 @@ client.json
 - tuic 
 - Shadowsocks 2022
 
+## 5.选择合适的proxy客户端并配置
+不同的平台需要不同的客户端软件，vless+tls的配置
+客户端软件还提供不同的使用模式。
+PAC、全局、不代理3种模式，区别在于：
+=======
+>>>>>>> 69a331e030882f83363dd019936d1c0e76276d40
+
+
+## 3.申请域名和证书
+这里只讲免费的域名如何申请，收费的域名就不说了。  
+    1.freenom.com  
+在这个网站上可以申请.tk  .cf 等后缀的免费域名，申请方法参考这个链接：[申请方法](https://zhujitips.com/328)  
+   2.还有一些提供免费进行域名解析网站  
+  它们的作用是不需要申请，直接将你的VPS的IP放在他们的域名前面，会自动解析到你的这个IP地址。比如：  1.2.3.4.sslip.io 将被自动解析到1.2.3.4这个IP地址，非常好用。  
+ - https://sslip.io/
+ - https://nip.io/
+  
+***证书申请***：
+证书用来进行网站验证和通信加密。 我们需要为域名申请一个真实的 TLS 证书，使网站具备标准 TLS 加密的能力及 HTTPS 访问的能力， Xray 等proxy工具进行加密的工具。
+证书申请大家都用acme.sh。命令如下，使用时需要将具体的域名替换成你需要的域名。
+```
+#运行安装脚本
+wget -O -  https://get.acme.sh | sh
+#让 acme.sh 命令生效
+. .bashrc
+#开启 acme.sh 的自动升级
+acme.sh --upgrade --auto-upgrade
+# 申请证书
+# zerossl跟letsencrypt 一样的
+./acme.sh  --issue --server zerossl -d example.com  -d www.example.com --standalone  -m yourname@gmail.com
+```
+在正式申请证书之前，可以先用测试命令(--issue --test)来验证是否可以成功申请，这样可以避免在本地配置有误时，反复申请证书失败，超过 Let's Encrypt 的频率上限（比如，每小时、每个域名、每个用户失败最多 5 次），导致后面的步骤无法进行。
+下载的证书位于/root/.acme.sh/example.com/目录下。  
+主要有2个文件，一个是example.com.key是私钥，一个是fullchain.cer这里面就是证书啦。
+acme.sh 会每 60 天检查一次证书并自动更新临期证书。
+
+<<<<<<< HEAD
+- windows
+- linux
+- android
+- ios
+
+
+
+
+=======
+完整的过程示例：
+![acme.sh](img/acme.gif)
+
+## 4.部署proxy服务 
+ss不要再使用了，包括SSR也不要再用。
+kcptun也不能使用了。
+
+这里介绍xray的部署，xray是在v2ray的基础上发展起来的代理工具，支持当前多种代理协议，且有庞大和活跃的支持团队。  
+
+v2ray基础上有2个团队的产品更新比较及时，分别是以下2种，由于XTLS团队更活跃，我们以这个为示例。  
+- Project X团队搞的xray： https://github.com/XTLS/Xray-core  
+- v2fly团队搞的v2ray： https://github.com/v2fly/v2ray-core  
+
+XTLS团队提供了一个示例配置库，引导小白进行配置，https://github.com/XTLS/Xray-examples
+注意并不是每一个配置都可以用，有些比如VLESS-TCP就不安全，推荐采用下面2个
+- VLESS-TCP-TLS-WS (recommended)
+- VLESS-TCP-TLS
+这里只介绍VLESS-TCP-TLS，VLESS相比VMESS更简单易用，单用VLESS不安全，必须套TLS。
+server.json
+下面的配置文件里面只需要修改带有“//”注释的行。
+- uuid可以点击此链接生成：https://uuid.900cha.com/
+- serverName 改成具体的域名
+- certificateFile和keyFile 对应前面申请的证书，使用绝对路径
+```
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "",//generate a id 
+                        "level": 0,
+                        "email": "abc@example.com"
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "dest": 8001
+                    },
+                    {
+                        "alpn": "h2",
+                        "dest": 8002
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "example.com",//domain
+                    "alpn": [
+                        "h2",
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/path/to/fullchain.crt", //certfile
+                            "keyFile": "/path/to/private.key"    //private key
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ]
+}
+```
+客户端也在原有的内容上进行一些修改：
+- adress 可以用IP，也可以用域名
+- id 前面生成的uuid
+- serverName 用域名
+client.json
+```
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": "1080",
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "ip": "127.0.0.1"
+            }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": "1081",
+            "protocol": "http"
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "1.2.3.4",// ip or domain
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "",//uuid 
+                                "encryption": "none",
+                                "level": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "example.domain",//domain
+                    "allowInsecure": false,
+                    "alpn": [
+                        "h2",
+                        "http/1.1"
+                    ],
+                    "disableSessionResumption": true
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "direct"
+            }
+        ]
+    }
+}
+
+```
+其他可用于部署的软件和方法不再列出，有些是基于QUIC协议，但UDP容易被Qos，有些是在原有协议的基础上增加SSL，大家可以自行搜索。
+- ShadowsocksR-native
+- hysteria 
+- tuic 
+- Shadowsocks 2022
+
 ## 5.选择合适的proxy客户端
 windows
 linux
 android
 ios
+>>>>>>> 69a331e030882f83363dd019936d1c0e76276d40
 
 
 
