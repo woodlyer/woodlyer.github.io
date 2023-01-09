@@ -9,7 +9,7 @@ Some information about proxy technologies.
 购买成熟的服务费钱，自已搭服务器费时间。
 [代理(Proxy)和VPN的区别]( https://zhuanlan.zhihu.com/p/451193697)  
 以下表格是两种方式的优缺点对比，个人根据情况进行选择。  
-<table border="2" align="center" >
+<table border="1" align="center" >
 	<tr>
 		<td></td>
 		<td align="center" >
