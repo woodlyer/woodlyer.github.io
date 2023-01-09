@@ -41,9 +41,9 @@ Some information about proxy technologies.
 
 # 一、常用的VPN提供商
 这些proxy服务提供商最重要的是服务质量和稳定性，以及是否提供退款保证。常用的包括：  
-1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386) 由搬瓦工2018年推出。主要优点有两个：1、流量稳定靠谱。2、付款方便，支持银联卡、PayPal和支付宝。  
-2. [ExpressVPN](https://www.expressvpn.com/) 30天退款保证  
-3.[StrongVPN](https://www.strongvpn.com) 
+-1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386) 由搬瓦工2018年推出。主要优点有两个：1、流量稳定靠谱。2、付款方便，支持银联卡、PayPal和支付宝。  
+- 2.[ExpressVPN](https://www.expressvpn.com/) 30天退款保证  
+- 3.[StrongVPN](https://www.strongvpn.com) 
 
 
 # 二、自建proxy服务
@@ -53,12 +53,11 @@ proxy服务提供的功能就是当你需要访问国外的某网站S时,提供�
 great firewall会教你做人。 此时，你需要一个中介来提供中继服务,这就是proxy。  
 ```
                        great
-    chrome            firewall                  google.com
-  ┌──────────┐            │                  ┌───────────┐
-  │          │            │                  │           │
-  │          ├─────────XXXXXXXXX────────────►│           │
-  │          │            │                  │           │
-  └──────────┘            │                  └───────────┘
+    chrome           firewall              google.com
+  ┌────────┐            │                  ┌─────────┐
+  │        ├─────────XXXXXXXXX────────────►│         │
+  │        │            │                  │         │
+  └────────┘            │                  └─────────┘
 
 ```
 浏览器的请示交由proxy client，proxy client 向 proxy server发送请示，proxy server 向google.com发起请示，google.com回复的数据也是按原路返回最终chrome就可以浏览google了。
@@ -351,7 +350,7 @@ https://free-ss.site/
 https://github.com/aiboboxx/v2rayfree
 
 
-# 更多的科学上网知识的相关链接
+# 三、更多的科学上网知识的相关链接
 
 tlanyan 有一些部署方法的介绍 https://itlanyan.com/
   
