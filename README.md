@@ -121,8 +121,17 @@ acme.sh --upgrade --auto-upgrade
 ./acme.sh  --issue --server zerossl -d example.com  -d www.example.com --standalone  -m yourname@gmail.com
 ```
 在正式申请证书之前，可以先用测试命令(--issue --test)来验证是否可以成功申请，这样可以避免在本地配置有误时，反复申请证书失败，超过 Let's Encrypt 的频率上限（比如，每小时、每个域名、每个用户失败最多 5 次），导致后面的步骤无法进行。
-下载的证书位于/root/.acme.sh/example.com/目录下。  
+下载的证书位于~/.acme.sh/example.com/目录下。  
 主要有2个文件，一个是example.com.key是私钥，一个是fullchain.cer这里面就是证书啦。
+
+***注意, 请不要直接使用此目录下的文件,因为这里面的文件都是内部使用, 而且目录结构可能会变化。***
+正确的使用方法是使用 --installcert 命令,并指定目标位置, 然后证书文件会被copy到相应的位置, 命令如下:
+```
+./acme.sh  --installcert  -d  example.com   \
+        --key-file   ~/ssl/example.com.key \
+        --fullchain-file ~/ssl/fullchain.cer 
+```
+
 acme.sh 会每 60 天检查一次证书并自动更新临期证书。
 
 完整的过程示例：
