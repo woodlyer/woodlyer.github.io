@@ -1,22 +1,23 @@
 # proxycn
 Some information about proxy technologies.
 
-提到科学上网，懂的人都懂。对于搞外贸的、搞技术研究的人等等是必不可少的。
-科学上网的原理及介绍： introduce
+提到科学上网，懂的人都懂。对于搞外贸的、搞技术研究的人等等是必不可少的。  
+我们平时用的技术并不是VPN技术，准确地来讲是proxy技术，代理技术，将目标网站的内容获取后，加密传输给你，从而避开审查。  
+代理的获取一般来讲主要有两种方式：
+- 购买他人提供的proxy/VPN服务
+- 自行搭建
 
-常用的技术并不是VPN技术，准确地来讲是proxy技术，代理技术，将目标网站的内容获取后，加密传输给你，从而避开审查。
-一般来讲主要有两种方式，一种是购买他人提供的proxy/VPN服务，一种是自行搭建proxy
-购买成熟的服务费钱，自已搭服务器费时间。
-[代理(Proxy)和VPN的区别]( https://zhuanlan.zhihu.com/p/451193697)  
+主要的区别是：[代理(Proxy)和VPN的区别]( https://zhuanlan.zhihu.com/p/451193697)。  
+简要总结一下就是：购买服务费钱，自已搭服务器费时间。  
 以下表格是两种方式的优缺点对比，个人根据情况进行选择。  
 <table border="1" align="center" >
 	<tr>
 		<td></td>
 		<td align="center" >
-			购买现成的服务<br>
+			购买服务<br>
 		</td>
         <td align="center">
-			自建Proxy服务<br>
+			自已搭建<br>
 		</td>
 	</tr>
     <tr >
@@ -27,24 +28,25 @@ Some information about proxy technologies.
     <tr >
 		<td>缺点</td>
     <td>
-			费钱<br>
+			费钱！！<br>
 			服务提供商良莠不齐，可能会有节点数量限制或带宽限制<br>
-			不自由<br>
+			有些服务商有安全隐患，会跑路，不自由<br>
 		</td>
         <td>
-			费时间<br>
-			需要一定的技术基础，并且花费一定的时间<br>
+			费时间！！<br>
+			需要一定的技术基础，花费一定的时间<br>
 			还要不定期进行技术升级<br>
 		</td>
     </tr>
 </table>
 
 # 一、常用的VPN提供商
-这些proxy服务提供商最重要的是服务质量和稳定性，以及是否提供退款保证。常用的包括：  
--1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386) 由搬瓦工2018年推出。主要优点有两个：1、流量稳定靠谱。2、付款方便，支持银联卡、PayPal和支付宝。  
-- 2.[ExpressVPN](https://www.expressvpn.com/) 30天退款保证  
-- 3.[StrongVPN](https://www.strongvpn.com) 
+这些proxy服务提供商最重要的是服务质量和稳定性，以及是否提供退款保证。常用的值得推荐的几家包括：  
+- 1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386) 由搬瓦工2018年推出。主要优点有两个：1、流量稳定靠谱。2、付款方便，支持银联卡、PayPal和支付宝。  
+- 2.[ExpressVPN](https://www.expressvpn.com/) 30天退款保证。ExpressVPN全平台适用，使用体验也不错，遇到墙封锁之后恢复的也最快，一般一个星期内就会陆续出各平台的更新包，更新程序之后，官方推荐的线路就能恢复正常连接了，以往在敏感时期ExpressVPN会受到持续针对。  
+- 3.[StrongVPN](https://www.strongvpn.com) --性价比最佳，2005年创立的老牌VPN，母公司是纳斯达克上市科技公司J2 Global.目前StrongVPN的价格在国外大厂VPN中算很便宜的，综合性价比高，支持支付宝付款。
 
+创立时间不超过3年的VPN服务，建议大家谨慎选择。
 
 # 二、自建proxy服务
 ## 1.总体技术路线
@@ -52,8 +54,8 @@ proxy服务提供的功能就是当你需要访问国外的某网站S时,提供�
 当你使用chrome浏览google.com时,不出意外地肯定是访问不了的,与chrome无关,用Edge也是一样的。
 great firewall会教你做人。 此时，你需要一个中介来提供中继服务,这就是proxy。  
 ```
-                       great
-    chrome           firewall              google.com
+                       Great
+    chrome           Firewall              google.com
   ┌────────┐            │                  ┌─────────┐
   │        ├─────────XXXXXXXXX────────────►│         │
   │        │            │                  │         │
@@ -61,19 +63,20 @@ great firewall会教你做人。 此时，你需要一个中介来提供中继�
 
 ```
 浏览器的请示交由proxy client，proxy client 向 proxy server发送请示，proxy server 向google.com发起请示，google.com回复的数据也是按原路返回最终chrome就可以浏览google了。
-当然这中间凭什么你可以访问proxy server，因为这中间是有加密的，great firewall虽然知道这里面有数据发送，但无法知道其中是什么内容。
+当然这中间凭什么你可以访问proxy server，因为这中间是有加密的，Great Firewall虽然知道这里面有数据发送，但无法知道其中是什么内容。
 
 ```
-                proxy      great       proxy
- chrome        client     firewall    server        google.com
+                proxy      Great       proxy
+ chrome        client     Firewall    server        google.com
 ┌───────┐      ┌──────┐      │       ┌──────┐        ┌───────┐
 │       ├─────►│      ├──────┼──────►│      ├───────►│       │
 │       │      │      │      │       │      │        │       │
 └───────┘      └──────┘      │       └──────┘        └───────┘
 ```
-以前大家知道的和用的最多的proxy软件是shadowsocks，简称SS。但是经过SS与防火墙多年的反复对抗，SS已经被防火墙精准识别，现在谁还用SS立马就会被封禁IP。所以SS是绝对不能使用的。
-由于防火墙的作用是阻挡，不管你用什么协议，只要被盯上就避免不了被封的结局。像kcptun，一个没有代理功能的软件，现在也用不了了，被精准识别。（太多人用kcptun创建隧道套SS）  
-目前还能使用的是基于SSL的一些技术，比如Trojan、V2ray等等，基本方法是使用SSL作为连接的加密协议，与普通web浏览器所用的协议相同，导致防火墙难以区分到底是普通的web连接还是代理连接。  
+以前大家知道的和用的最多的proxy软件是shadowsocks，简称SS。但是经过SS与防火墙多年的反复对抗，SS已经被防火墙精准识别，现在SS一被使用，立马就会被封禁IP。SS是绝对不能用的。  
+由于防火墙的作用是阻挡，不管你用什么协议，只要被盯上就避免不了被封的结局。像kcptun，一个没有代理功能的软件，现在也用不了了，被精准识别。（太多人用kcptun创建隧道套SS）    
+目前还能使用的是基于SSL的一些技术，比如Trojan、V2ray等等，基本方法是使用SSL作为连接的加密协议，与普通web浏览器所用的协议相同，导致防火墙难以区分到底是普通的web连接还是代理连接。（根据最新的用户反馈，Trojan、V2ray这类基于SSL的协议也会被识别，采用的是GPU人工智能分析的方法，当然加密的内容是不会被破解的，如果被破解了就是世界级大新闻。） 
+
 而SSL与SS协议相比，需要用到域名、证书等，与SS相比部署难度提高了很多。
 其他的proxy 协议，比如WireGuard，根据部分读者反映，WireGuard协议在中国国内使用不稳定，会出现显示连接却上不了网的情况，比较鸡肋。
 
@@ -87,7 +90,8 @@ great firewall会教你做人。 此时，你需要一个中介来提供中继�
 ## 2.VPS的选择
 VPS提供商挺多的，新手最早看到的教程都是用[搬瓦工](https://bandwagonhost.com/aff.php?aff=56257)和[vultr](https://www.vultr.com/?ref=7621285)，搬瓦工最便宜也要49$/年，vultr更是需要60$/年。
 
-[DMIT](https://www.dmit.io/)：自成立以来，DMIT便是土豪商家的代表，资费不便宜。今年7月DMIT收购HKServerSolution国际站部分业务后，成为CN2 GIA VPS的大鳄，CN2带宽充足（搬瓦工有时也会向DMIT购买带宽）。产品质量和稳定性都比较有保障，适合想省心不折腾的网友，本站目前也托管在此。季付、半年付、年付产品可使用DMIT优惠码 DMIT59CUGN 续费优惠5%。官网：https://www.dmit.io，购买建议参考：DMIT服务器购买和使用教程；
+[DMIT](https://www.dmit.io/)：  
+自成立以来，DMIT便是土豪商家的代表，资费不便宜。今年7月DMIT收购HKServerSolution国际站部分业务后，成为CN2 GIA VPS的大鳄，CN2带宽充足（搬瓦工有时也会向DMIT购买带宽）。产品质量和稳定性都比较有保障，适合想省心不折腾的网友，本站目前也托管在此。季付、半年付、年付产品可使用DMIT优惠码 DMIT59CUGN 续费优惠5%。官网：https://www.dmit.io
 
 [racknerd.com]( https://my.racknerd.com/aff.php?aff=3278)  
 RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选的2020年TOP10商家，2021年度TOP3商家。因为其高性价比VPS的特色，以及迅速及时的工单服务，在国外和国内用户中热度都很高，知名度连年攀升。商家官网有繁体中文版，并支持国内的支付宝，微信，以及国外主流的PayPal、信用卡等付款方式。
