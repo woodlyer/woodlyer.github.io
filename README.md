@@ -111,7 +111,19 @@ RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选�
 证书申请大家都用acme.sh。命令如下，使用时需要将具体的域名替换成你需要的域名。
 ```
 #运行安装脚本
+```
 wget -O -  https://get.acme.sh | sh
+```
+把 acme.sh 安装到你的 home 目录下:~/.acme.sh/并创建 一个 bash 的 alias, 方便你的使用:
+```
+alias acme.sh=~/.acme.sh/acme.sh
+echo 'alias acme.sh=~/.acme.sh/acme.sh' >>/etc/profile
+```
+在第一步的安装过程中会自动为你创建 cronjob, 每天 0:00 点自动检测所有的证书, 如果快过期了, 需要更新, 则会自动更新证书。
+```
+00 00 * * * root /root/.acme.sh/acme.sh --cron --home /root/.acme.sh &>/var/log/acme.sh.logs
+```
+
 #让 acme.sh 命令生效
 . .bashrc
 #开启 acme.sh 的自动升级
@@ -120,19 +132,30 @@ acme.sh --upgrade --auto-upgrade
 # zerossl跟letsencrypt 一样的
 ./acme.sh  --issue --server zerossl -d example.com  -d www.example.com --standalone  -m yourname@gmail.com
 ```
+webroot模式要求在服务器上已经运行了http服务(比如nginx)，并且可以通过公网访问，该模式的好处是，你无需在申请证书的过程中停止web服务，因此。
+使用webroot模式申请证书时，acme.sh会在网站对应域名的webroot目录下生成域名验证文件, 然后通过公网访问之，以验证对域名的所有权。验证完毕后，acme.sh会清除这些临时生成的文件。
+申请证书使用--issue命令：
+```
+acme.sh --issue -d example.com -d www.example.com -w  /home/webroot  -m yourname@gmail.com
+```
+
+
 在正式申请证书之前，可以先用测试命令(--issue --test)来验证是否可以成功申请，这样可以避免在本地配置有误时，反复申请证书失败，超过 Let's Encrypt 的频率上限（比如，每小时、每个域名、每个用户失败最多 5 次），导致后面的步骤无法进行。
 下载的证书位于~/.acme.sh/example.com/目录下。  
-主要有2个文件，一个是example.com.key是私钥，一个是fullchain.cer这里面就是证书啦。
-
+该目录之下是证书、私钥等文件以及一些其它配置文件：
+- 证书文件: example.com.cer
+- 私钥: example.com.key
+- 中间证书: ca.cer
+- 证书链:fullchain.cer
+  
 ***注意, 请不要直接使用此目录下的文件,因为这里面的文件都是内部使用, 而且目录结构可能会变化。***
+
 正确的使用方法是使用 --installcert 命令,并指定目标位置, 然后证书文件会被copy到相应的位置, 命令如下:
 ```
 ./acme.sh  --installcert  -d  example.com   \
         --key-file   ~/ssl/example.com.key \
         --fullchain-file ~/ssl/fullchain.cer 
 ```
-
-acme.sh 会每 60 天检查一次证书并自动更新临期证书。
 
 完整的过程示例：
 ![acme.sh](img/acme.gif)
@@ -293,7 +316,7 @@ client.json
 }
 
 ```
-其他可用于部署的软件和方法不再列出，有些是基于QUIC协议，但UDP容易被Qos，有些是在原有协议的基础上增加SSL，大家可以自行搜索。
+其他可用于部署的软件和方法不再详细列出，有些是基于QUIC协议，但UDP容易被Qos，有些是在原有协议的基础上增加SSL，大家可以自行搜索。
 - ShadowsocksR-native
 - hysteria 
 - tuic 
