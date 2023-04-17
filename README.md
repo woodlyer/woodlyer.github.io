@@ -397,7 +397,41 @@ v2fly官方网站 https://www.v2fly.org/
 讨论网络技术的论坛 https://github.com/net4people/bbs
 
 
+# 技术路线
+对证书的需求对比
+
+xray,v2ray,v2fly   vless,vmess,
+kcp 基于UDP的，也支持tcp模式，(only for linux) kcptun
+hysteri  quic  需要证书
+tuic  quic   需要证书，只支持proxy 模式，不支持tunnel模式
+gost 支持多种协议，ss,tls, wss, kcp,quic,h2, http...
+
+shadowtls
+navieproxy
 
 
 
+速度对比：
+tuic >  hyteria > kcp > tls
+
+
+# 一键安装脚本
+
+
+
+# 客户端
+winxray
+shadowrocket
+v2rayN
+
+
+
+# 路由器
+供一些不方便安装科学网络工具的设备进行透明上网。 （不需要进行配置，接入就可以上科学的网络）
+硬件
+R2S,。。。
+
+
+软件
+openwrt passwall2
 
