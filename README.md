@@ -435,3 +435,43 @@ R2S,。。。
 软件
 openwrt passwall2
 
+# 技术走向
+必然是矛与盾不断进化中前进，快速发展。
+2010年谷歌退出
+
+http代理  
+socks代理
+
+
+
+最早的python写的
+ss -> ssr
+v2ray vmess vless -> tls  -> vision 
+trojan -> trojan-go
+
+kcptun -> port range
+hysteria quic
+tuic
+
+终极大杀器，白名单
+域名白名单，而非IP白名单。
+
+
+
+
+
+基于UDP的一直是小众用户。
+
+c/C++语言, golang为主
+
+
+1.百花齐放，百家争鸣
+2.封锁的技术也会越来越厉害。 
+对tls in tls 用上GPU进行特征分析了。
+
+![image](https://user-images.githubusercontent.com/118674311/232531655-5a2065d2-a244-46cd-a67d-47e295323aa1.png)
+
+
+
+
+
