@@ -97,20 +97,17 @@ VPS提供商挺多的，新手最早看到的教程都是用[搬瓦工](https://
 [racknerd.com]( https://my.racknerd.com/aff.php?aff=3278)  
 RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选的2020年TOP10商家，2021年度TOP3商家。因为其高性价比VPS的特色，以及迅速及时的工单服务，在国外和国内用户中热度都很高，知名度连年攀升。商家官网有繁体中文版，并支持国内的支付宝，微信，以及国外主流的PayPal、信用卡等付款方式。
 前两年因为有传言说老板是跑路四大金刚，RackNerd是灵车，和RackNerd迅速蹿升的知名度伴随着的还有巨大的争议。不过由于这几年RackNerd持续稳定的服务，这类传言也逐渐销声匿迹。
-点击[黑色星期五优惠](https://www.racknerd.com/BlackFriday/ )这个页面购买优惠的VPS。 首页上最上面可能也会不定期展示优惠链接， 点击这样的优惠链接购买才划算。这个页面可能会随着时间变化，大家可以在网上搜索一下，用这样的优惠链接打开进行购买。
+点击[新年优惠](https://www.racknerd.com/NewYear/ )这个页面购买优惠的VPS。 首页上最上面可能也会不定期展示优惠链接， 点击这样的优惠链接购买才划算。这个页面可能会随着时间变化，大家可以在网上搜索一下，用这样的优惠链接打开进行购买。 国内需要购买位于 Los Angeles DC02的机子，因为速度针对国内有优化，
 [![优惠页面](./img/rack-discount.png)](https://www.racknerd.com/NewYear/)
+[!vps](./img/rack-discount.png)
 
-具体的步骤可以参考 
-下面我们就分别介绍这几个步骤。[部署XRAY流程](./xray_deploy.md)
+具体的步骤可以参考 [部署XRAY流程](./xray_deploy.md)   
 
 
-其他可用于部署的软件和方法不再详细列出，有些是基于QUIC协议，但UDP容易被Qos，有些是在原有协议的基础上增加SSL，大家可以自行搜索。
-- ShadowsocksR-native
-- hysteria 
-- tuic 
-- Shadowsocks 2022
 
-## 5.选择合适的proxy客户端并配置
+
+
+## 3.选择合适的proxy客户端
 不同的平台需要不同的客户端软件，vless+tls的配置
 目前最常用的就是以下几种平台：我们整理了一个表格，提供各个平台的软件的下载。
 - windows
@@ -127,13 +124,16 @@ RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选�
 | android | [v2rayNG](https://github.com/2dust/v2rayNG/releases), [igniter](https://github.com/trojan-gfw/igniter/releases), |                        |
 | ios     | Shadowrocket(收费）,Pharos Pro ,                                                                                    | 需要注册一个外国区的AppleID      |
 
+其他还有：  
+Clash  
+QuantumX  
 
 
-[apple id申请](https://ssr.tools/104)
+[外区Apple Id申请教程](https://ssr.tools/104)
 
 
 
-客户端的配置：
+## 4.客户端的工作模式配置
 
 客户端软件还提供不同的使用模式。
 PAC、全局、不代理3种模式，区别在于：
@@ -141,7 +141,8 @@ PAC、全局、不代理3种模式，区别在于：
 - 全局模式: 意思是访问所有网站都走代理节点。这种模式访问国内网站速度略慢，并且耗费流量。
 - PAC模式： 根据pac文件来判断访问时需不需要经过代理，较为智能，省流量。但是较为依赖pac规则，小众网站可能不经过代理，需要自己编辑规则，或者切换全局代理模式。
 
-用的最多的也是浏览器，建议在浏览器上安装proxySwitchyOmega插件，控制浏览器访问网络时从代理进行数据获取。
+## 5.浏览器器配置
+用的最多的也是浏览器，浏览器上需要安装proxySwitchyOmega插件，控制浏览器访问网络时从代理进行数据获取。
 https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif
 
 proxySwitchyOmega配置方法参见： https://proxy-switchyomega.com/settings/
@@ -172,41 +173,45 @@ https://github.com/aiboboxx/v2rayfree
 
 # 三、更多的科学上网知识的相关链接
 
-tlanyan 有一些部署方法的介绍 https://itlanyan.com/
-  
-目前最重要的科学上网工具：Xray的官方文档 https://xtls.github.io/
-
+tlanyan 有一些部署方法的介绍 https://itlanyan.com/  
+目前最重要的科学上网工具：Xray的官方文档 https://xtls.github.io/  
 v2fly官方网站 https://www.v2fly.org/ 
 
 讨论网络技术的论坛 https://github.com/net4people/bbs
 
 
-# 技术路线
-对证书的需求对比
+
+
+# 四、科学网络技术主体工具
+
+各种工具的对比
+
+| 软件         | 支持的协议                    | 优点                     | 缺点            | 证书          | 备注             |
+| :--------- | :----------------------- | :--------------------- | :------------ | :---------- | :------------- |
+| xray       | vless,vmess,xtls,vision  | 基于tls的，更新及时            | 用的人太多，会被针对    | 需要          | 当前社区的主流工具      |
+| naiveproxy | naive                    | 更新及时                   |               |             | 小众             |
+| hysteria   | quic+obs                 | 基于                     | 基于UDP可能被Qos   | 需要          | 比较红            |
+| tuic       | quic                     | 速度特别快                  | 暂时不支持tunnel模式 | 需要          | 小众             |
+| kcptun     | kcp                      | 对丢包率高的线路有加速效果          | 被封            | 不需要         |                |
+| gost       | tls,mtls,ss,kcp,quic,tcp | 协议类型多，支持proxy和tunnel模式 | quic速度慢       | 不需要（可以自己生成） | 用起来有点复杂，对小白不友好 |
+
 
 xray,v2ray,v2fly   vless,vmess,
 kcp 基于UDP的，也支持tcp模式，(only for linux) kcptun
-hysteri  quic  需要证书
-tuic  quic   需要证书，只支持proxy 模式，不支持tunnel模式
+hysteri  基于quic  需要证书
+tuic 基于 quic   需要证书，只支持proxy 模式，不支持tunnel模式
 gost 支持多种协议，ss,tls, wss, kcp,quic,h2, http...
 
 shadowtls
 navieproxy
 
 
-
 速度对比：
-tuic >  hyteria > kcp > tls
-
-
-# 一键安装脚本
+tuic >  hyteria > tls(不被针对) > kcp > tls(被针对)
 
 
 
-# 客户端
-winxray
-shadowrocket
-v2rayN
+
 
 
 
@@ -220,39 +225,7 @@ R2S,。。。
 openwrt passwall2
 
 # 技术走向
-必然是矛与盾不断进化中前进，快速发展。
-2010年谷歌退出
-
-http代理  
-socks代理
-
-
-
-最早的python写的
-ss -> ssr
-v2ray vmess vless -> tls  -> vision 
-trojan -> trojan-go
-
-kcptun -> port range
-hysteria quic
-tuic
-
-终极大杀器，白名单
-域名白名单，而非IP白名单。
-
-
-
-
-
-基于UDP的一直是小众用户。
-
-c/C++语言, golang为主
-
-
-1.百花齐放，百家争鸣
-2.封锁的技术也会越来越厉害。 
-对tls in tls 用上GPU进行特征分析了。
-
+网络工具，与网络封锁技术，一直像猫鼠游戏一样在矛与盾的不断升级中向前进化，相受相杀。
 ![image](https://user-images.githubusercontent.com/118674311/232531655-5a2065d2-a244-46cd-a67d-47e295323aa1.png)
 
 
