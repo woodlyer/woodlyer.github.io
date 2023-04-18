@@ -97,7 +97,9 @@ VPS提供商挺多的，新手最早看到的教程都是用[搬瓦工](https://
 [racknerd.com]( https://my.racknerd.com/aff.php?aff=3278)  
 RackNerd，距今为止已成立3年，国外知名VPS平台,cheap VPS类票选的2020年TOP10商家，2021年度TOP3商家。因为其高性价比VPS的特色，以及迅速及时的工单服务，在国外和国内用户中热度都很高，知名度连年攀升。商家官网有繁体中文版，并支持国内的支付宝，微信，以及国外主流的PayPal、信用卡等付款方式。
 前两年因为有传言说老板是跑路四大金刚，RackNerd是灵车，和RackNerd迅速蹿升的知名度伴随着的还有巨大的争议。不过由于这几年RackNerd持续稳定的服务，这类传言也逐渐销声匿迹。
-点击[新年优惠](https://www.racknerd.com/NewYear/ )这个页面购买优惠的VPS。 首页上最上面可能也会不定期展示优惠链接， 点击这样的优惠链接购买才划算。这个页面可能会随着时间变化，大家可以在网上搜索一下，用这样的优惠链接打开进行购买。 国内需要购买位于 Los Angeles DC02的机子，因为速度针对国内有优化，
+点击[新年优惠](https://www.racknerd.com/NewYear/ )这个页面购买优惠的VPS。  
+首页上最上面可能也会不定期展示优惠链接， 点击这样的优惠链接购买才划算。这个页面可能会随着时间变化，大家可以在网上搜索一下，用这样的优惠链接打开进行购买。   
+国内需要购买位于 Los Angeles DC02的机子，因为速度针对国内有优化。
 [![优惠页面](./img/rack-discount.png)](https://www.racknerd.com/NewYear/)
 ![vps](./img/cheap.png)
 
