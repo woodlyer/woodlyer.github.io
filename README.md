@@ -226,6 +226,36 @@ openwrt passwall2
 ![image](https://user-images.githubusercontent.com/118674311/232531655-5a2065d2-a244-46cd-a67d-47e295323aa1.png)
 
 
+# ❌不推荐购买或使用的VPN产品❌
 
+1. Hola VPN：会强制使用用户的网絡作为他人的VPN连接设备。
+2. Urban VPN：同Hola，同样使用用户网絡。
+3. Panda VPN(熊猫VPN)：疑似中资，有安全性风险。
+4. Plex加速器：和Panda VPN同个公司。
+5. 快连VPN，也是高机率中资而且隐私条款很危险。
+6. 小牛VPN：可能钓鱼。
+7. Opera浏览器内置VPN：360公司可以控制，安全性无法确认。
+8. Express VPN：来自香港，有中资背景。
+9. Easy VPN：中资。
+10. Itop VPN：中资。
+11. 老王VPN：可能钓鱼。
+12. 蚂蚁VPN：可能钓鱼，經過其他群組的用戶回饋，也可能不是釣魚。
+13. UFO VPN：可能中资和钓鱼。
+14. Turbo VPN：可能中資(地址是新加坡)，也可能釣魚。
+15. VPN Monster：和Turbo VPN同公司。
+16. pure vpn：來自香港。
+17. Ivacy VPN:：可能和pure vpn同個公司。
+18. ipvanish：曾分享用戶資料給美國政府，現在和express vpn屬於同一個公司。
+19. zenmate vpn：和express vpn同一個公司。
+20. cyberghost vpn：同上。
+21. pia vpn：同上。
+22. Hotspot Shield：中資，而且服務條款說可能賣廣告。
+23. touch vpn：和Hotspot Shield同個公司。
+24. better net vpn：同上，而且之前有看過別人使用這款被安裝廣告和挖礦。
+25. 卡巴斯機vpn：使用22~24公司的服務合作，而且公司來自俄羅斯，安全性無法控制。
+26. golden flog vypr vpn：疑似來自伊朗。
+27. 自由門：低安全性。
+28. 蘭燈：低安全性。
+29. 佛跳牆：低安全性。 
 
 
