@@ -1,4 +1,4 @@
-# proxycn
+# 科学上网知识科普
 Some information about proxy technologies.
 
 提到科学上网，懂的人都懂。对于搞外贸的、搞技术研究的人等等是必不可少的。  
